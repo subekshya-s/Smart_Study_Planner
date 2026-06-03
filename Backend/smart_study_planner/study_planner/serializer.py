@@ -6,3 +6,4 @@ class StudyPlannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudyPlanner
         fields = "__all__"
+        read_only_fields = ['user']

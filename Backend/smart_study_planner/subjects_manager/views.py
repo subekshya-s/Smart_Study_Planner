@@ -1,8 +1,15 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Subjects
 from .serializers import SubjectsSerializer
-# Create your views here.
+
 class SubjectsViewSet(ModelViewSet):
-    queryset = Subjects.objects.all()
-    serializer_class = SubjectsSerializer
+    serializer_class= SubjectsSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Subjects.objects.filter(user=self.request.user)
+
+    def perform_create(self,serializer):
+        serializer.save(user=self.request.user)
