@@ -22,6 +22,8 @@ urlpatterns = [
     path('api/',include('subjects_manager.urls')),
     path('api/',include('study_planner.urls')),
     path('api/',include('accounts.urls')),
+    path('api/', include('ai_engine.urls')),    # ADD THIS
+
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
