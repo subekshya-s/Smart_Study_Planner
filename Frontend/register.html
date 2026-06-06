@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Smart Study Planner</title>
+    <link rel = "stylesheet" href="auth.css">
+</head>
+<body>
+    <div class = "auth-wrapper">
+        <div class="auth-card">
+            <h1 class ="auth-title">Smart Study planner</h1>
+            <h2>Create your account</h2>
+
+    <div id="error-msg" class="error-box hidden"></div>
+
+        <form id = "register-form" novalidate>
+            
+             <div class="form-group">
+
+            <label for ="username">Username:</label>
+            <input type="text" name ="username" class="name" id ="username" placeholder="Enter your username">
+            </div>
+
+            <div class="form-group">
+
+            <label for ="email">Email(optional):</label>
+            <input type ="email" name = "email" class="name" id ="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+
+            <label for ="password">Password:</label>
+            <input type="password" name = "password" id ="password" placeholder="Enter your password">
+            </div>
+            <button type = "submit" id="submit-btn">Create Account</button>
+            <p class="auth-link">Already have an account? <a href="login.html">Log in</a></p>
+        </form>
+        
+    </div>
+    </div>
+    <script src="register.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+body {
+    background-image: linear-gradient(
+        rgba(0,0,0,0.4),
+        rgba(0,0,0,0.4)
+    ),
+    url('jaredd-craig-HH4WBGNyltc-unsplash.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the form */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Card */
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    height: 85vh;
+
+    background-color: rgba(231, 185, 185, 0.85);
+
+    padding: 40px;
+    border-radius: 20px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main Heading */
+.auth-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgb(76, 38, 38);
+    margin-bottom: 8px;
+}
+
+/* Subtitle */
+.auth-card h2 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgb(122, 89, 89);
+    margin-bottom: 30px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 18px;
+}
+
+/* Labels */
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    color: rgb(76, 38, 38);
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid rgb(216, 194, 194);
+    border-radius: 8px;
+
+    font-size: 1rem;
+
+    transition: all 0.3s ease;
+}
+
+/* Input Focus */
+input:focus {
+    outline: none;
+
+    border-color: rgb(76, 38, 38);
+
+    box-shadow: 0 0 8px rgba(76, 38, 38, 0.25);
+}
+
+/* Button */
+button {
+    width: 100%;
+
+    padding: 13px;
+
+    background-color: rgb(76, 38, 38);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+
+    transition: all 0.3s ease;
+}
+
+/* Button Hover */
+button:hover {
+    background-color: rgb(96, 48, 48);
+    transform: translateY(-2px);
+}
+
+/* Error Message */
+.error-box {
+    display: none;
+
+    background-color: #ffe0e0;
+    color: #c0392b;
+
+    padding: 10px;
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+
+    font-size: 0.9rem;
+}
+
+/* Login Link */
+.auth-link {
+    text-align: center;
+    margin-top: 18px;
+
+    color: rgb(76, 38, 38);
+    font-size: 0.95rem;
+}
+
+.auth-link a {
+    color: rgb(76, 38, 38);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
