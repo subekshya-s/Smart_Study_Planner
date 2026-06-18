@@ -3,220 +3,895 @@
 <head>
 <meta charset="UTF-8">
 <title>Smart Study Planner</title>
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background: #f8f9fa;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    background: #f0f2f5;
+    display: flex;
 }
 
-/* Sidebar */
+/* SIDEBAR */
 .sidebar {
-    width: 240px;
+    width: 220px;
     height: 100vh;
     position: fixed;
     background: #ffffff;
     border-right: 1px solid #eee;
-    padding: 20px;
-}
-
-.sidebar h4 {
-    font-weight: 600;
-}
-
-.sidebar a {
-    display: block;
-    padding: 10px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #333;
-    margin-bottom: 5px;
-    transition: 0.2s;
-}
-
-.sidebar a:hover {
-    background: #f1f3f5;
-}
-
-/* Main */
-.main {
-    margin-left: 250px;
-    padding: 30px;
-}
-
-/* Cards */
-.card {
-    border: none;
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-3px);
-}
-
-/* Inputs */
-.form-control {
-    border-radius: 10px;
-    border: 1px solid #ddd;
-}
-
-.form-control:focus {
-    box-shadow: none;
-    border-color: #000;
-}
-
-/* Buttons */
-.btn-dark {
-    border-radius: 10px;
-}
-
-/* Timer */
-.timer {
-    font-size: 2.5rem;
-    font-weight: 600;
-}
-
-/* List */
-.list-item {
+    padding: 20px 14px;
     display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+    flex-direction: column;
+    gap: 2px;
 }
 
-.check-btn {
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.sidebar-logo i { color: #534AB7; font-size: 20px; }
+
+.nav-section {
+    font-size: 10px;
+    color: #aaa;
+    padding: 8px 10px 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
     border: none;
-    background: black;
-    color: white;
-    border-radius: 6px;
-    padding: 3px 8px;
+    background: none;
+    width: 100%;
+    text-align: left;
+    transition: 0.2s;
 }
 
+.nav-item:hover { background: #f5f5f5; color: #333; }
+.nav-item.active { background: #EEEDFE; color: #534AB7; font-weight: 500; }
+.nav-item i { font-size: 16px; }
+
+.nav-item.logout { color: #e74c3c; margin-top: auto; }
+.nav-item.logout:hover { background: #fdf0f0; }
+
+/* MAIN */
+.main {
+    margin-left: 220px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.topbar-title { font-size: 16px; font-weight: 600; color: #333; }
+
+.btn-primary-custom {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #534AB7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* CONTENT */
+.content { padding: 24px; }
+
+/* STATS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid #eee;
+}
+
+.stat-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+.stat-value { font-size: 26px; font-weight: 600; color: #333; }
+.stat-sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+
+/* GRID */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+/* CARDS */
+.card-custom {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 18px;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* FORM */
+.form-row { display: flex; gap: 8px; margin-bottom: 12px; }
+
+.input-custom {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+.input-custom:focus { border-color: #534AB7; }
+
+.btn-add {
+    padding: 8px 16px;
+    background: #534AB7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* LIST ITEMS */
+.list-item-custom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.list-item-custom:last-child { border: none; }
+
+.item-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #534AB7;
+    flex-shrink: 0;
+}
+
+.item-info { flex: 1; }
+.item-name { font-size: 13px; font-weight: 500; color: #333; }
+.item-sub { font-size: 11px; color: #888; }
+
+.pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.pill-pending { background: #FAEEDA; color: #854F0B; }
+.pill-done { background: #EAF3DE; color: #3B6D11; }
+.pill-purple { background: #EEEDFE; color: #534AB7; }
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    color: #aaa;
+}
+
+.btn-icon:hover { color: #e74c3c; }
+
+/* TIMER */
+.timer-display {
+    text-align: center;
+    padding: 12px 0;
+}
+
+.timer-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 6px solid #EEEDFE;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.timer-time { font-size: 26px; font-weight: 600; color: #333; }
+.timer-label { font-size: 12px; color: #888; margin-bottom: 12px; }
+
+.timer-btns { display: flex; gap: 8px; justify-content: center; }
+
+.btn-timer {
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn-timer.start { background: #534AB7; color: white; border: none; }
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 30px 0;
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* PAGES */
+.page { display: none; }
+.page.active { display: block; }
 </style>
 </head>
 
 <body>
-
-<!-- Sidebar -->
-<div class="sidebar">
-    <h4>📘 Planner</h4>
-    <a href="#">Dashboard</a>
-    <a href="#">Subjects</a>
-    <a href="#">Tasks</a>
-    <a href="#">Focus</a>
-    <a href="#">Progress</a>
-</div>
-
-<!-- Main -->
-<div class="main">
-
-    <h3 class="mb-4">Smart Study Planner</h3>
-
-    <div class="row g-4">
-
-        <!-- Subjects -->
-<div class="col-md-4">
-    <div class="card p-3">
-        <h6>Subjects</h6>
-
-        <input id="subjectName" class="form-control mb-2" placeholder="Subject name">
-        <input id="subjectHours" type="number" class="form-control mb-2" placeholder="Weekly hours">
-
-        <button class="btn btn-dark w-100" onclick="addSubject()">Add</button>
-
-        <div id="subjectList" class="mt-3"></div>
-    </div>
-</div>
-
-        <!-- Tasks -->
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h6>Tasks</h6>
-                <input class="form-control mb-2" placeholder="Add task">
-                <button class="btn btn-dark w-100">Add</button>
-
-                <!-- Sample UI items -->
-                <div class="mt-3">
-                    <div class="list-item">
-                        Study HTML
-                        <button class="check-btn">✔</button>
-                    </div>
-                    <div class="list-item">
-                        Revise CSS
-                        <button class="check-btn">✔</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Timer -->
-        <div class="col-md-4">
-            <div class="card p-3 text-center">
-                <h6>Focus Timer</h6>
-                <div class="timer">25:00</div>
-                <button class="btn btn-dark mt-2">Start</button>
-                <button class="btn btn-outline-dark mt-2">Reset</button>
-            </div>
-        </div>
-
-    </div>
-
-    <! -- Note taker -->
-    <div class = 
-</div>
 <script>
-let subjects = []
-function addSubject() {
-    let name = document.getElementById("subjectName").value
-    let hours = document.getElementById("subjectHours").value
-    if (name === "" || hours === "") {
-        alert("Fill all fields")
-        return
-    }
-    subjects.push({ name: name, hours: hours })
-    displaySubjects()
-    // clear input
-    document.getElementById("subjectName").value = ""
-    document.getElementById("subjectHours").value = ""
-}
-function displaySubjects() {
-    let list = document.getElementById("subjectList")
-    list.innerHTML = ""
-    for (let i = 0; i < subjects.length; i++) {
-        list.innerHTML += `
-            <div class="list-item">
-                <div>
-                    <b>${subjects[i].name}</b><br>
-                    <small>${subjects[i].hours} hrs/week</small>
-                </div>
-                <div>
-                    <button onclick="editSubject(${i})">✏️</button>
-                    <button onclick="deleteSubject(${i})">❌</button>
-                </div>
-            </div>
-        `
-    }
-}
-function deleteSubject(index) {
-    subjects.splice(index, 1)
-    displaySubjects()
-}
-function editSubject(index) {
-   let newName = prompt("Edit name", subjects[index].name)
-    let newHours = prompt("Edit hours", subjects[index].hours)
-    if (newName && newHours) {
-        subjects[index].name = newName
-        subjects[index].hours = newHours
-        displaySubjects()
-    }
-}
+    const token = localStorage.getItem('access_token');
+    if (!token) window.location.href = 'login.html';
 </script>
 
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <i class="ti ti-brain"></i>
+        Smart Study
+    </div>
 
+    <div class="nav-section">Main</div>
+    <button class="nav-item active" onclick="showPage('dashboard')">
+        <i class="ti ti-layout-dashboard"></i> Dashboard
+    </button>
+    <button class="nav-item" onclick="showPage('subjects')">
+        <i class="ti ti-books"></i> Subjects
+    </button>
+    <button class="nav-item" onclick="showPage('planner')">
+        <i class="ti ti-calendar"></i> Planner
+    </button>
+
+    <div class="nav-section">AI Tools</div>
+    <button class="nav-item" onclick="showPage('upload')">
+        <i class="ti ti-upload"></i> Upload PDF
+    </button>
+    <button class="nav-item" onclick="showPage('quiz')">
+        <i class="ti ti-help"></i> Quiz
+    </button>
+    <button class="nav-item" onclick="showPage('weak')">
+        <i class="ti ti-alert-triangle"></i> Weak Points
+    </button>
+
+    <div class="nav-section">Focus</div>
+    <button class="nav-item" onclick="showPage('timer')">
+        <i class="ti ti-clock"></i> Timer
+    </button>
+
+    <div style="margin-top: auto;">
+        <button class="nav-item logout" onclick="logout()">
+            <i class="ti ti-logout"></i> Logout
+        </button>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="topbar-title" id="page-title">Dashboard</div>
+        <button class="btn-primary-custom" id="topbar-btn" onclick="handleTopbarBtn()">
+            <i class="ti ti-plus"></i> Add session
+        </button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- DASHBOARD PAGE -->
+        <div class="page active" id="page-dashboard">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Subjects</div>
+                    <div class="stat-value" id="stat-subjects">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Today's sessions</div>
+                    <div class="stat-value" id="stat-sessions">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Quizzes taken</div>
+                    <div class="stat-value" id="stat-quizzes">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Weak topics</div>
+                    <div class="stat-value" id="stat-weak">0</div>
+                </div>
+            </div>
+
+            <div class="grid2">
+                <div class="card-custom">
+                    <div class="card-title">My Subjects</div>
+                    <div id="dashboard-subjects">
+                        <div class="empty-state">No subjects yet</div>
+                    </div>
+                </div>
+                <div class="card-custom">
+                    <div class="card-title">Today's Schedule</div>
+                    <div id="dashboard-planner">
+                        <div class="empty-state">No sessions today</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBJECTS PAGE -->
+        <div class="page" id="page-subjects">
+            <div class="card-custom">
+                <div class="card-title">Add New Subject</div>
+                <div class="form-row">
+                    <input class="input-custom" id="subjectName" placeholder="Subject name">
+                    <input class="input-custom" type="number" id="subjectHours" placeholder="Hours/week" style="max-width:130px">
+                    <button class="btn-add" onclick="addSubject()">+ Add</button>
+                </div>
+            </div>
+            <br>
+            <div class="card-custom">
+                <div class="card-title">All Subjects</div>
+                <div id="subjectList">
+                    <div class="empty-state">No subjects yet. Add one above!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLANNER PAGE -->
+        <div class="page" id="page-planner">
+            <div class="card-custom" style="margin-bottom:16px">
+                <div class="card-title">Add Study Session</div>
+                <div class="form-row">
+                    <select class="input-custom" id="plannerSubject">
+                        <option value="">Select subject</option>
+                    </select>
+                    <input class="input-custom" type="date" id="plannerDate">
+                    <input class="input-custom" type="time" id="plannerStart">
+                    <input class="input-custom" type="time" id="plannerEnd">
+                    <button class="btn-add" onclick="addSession()">+ Add</button>
+                </div>
+            </div>
+            <div class="card-custom">
+                <div class="card-title">All Sessions</div>
+                <div id="sessionList">
+                    <div class="empty-state">No sessions yet. Add one above!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPLOAD PDF PAGE -->
+        <div class="page" id="page-upload">
+            <div class="card-custom">
+                <div class="card-title">Upload PDF Notes</div>
+                <div class="form-row">
+                    <select class="input-custom" id="pdfSubject">
+                        <option value="">Select subject</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <input class="input-custom" type="file" id="pdfFile" accept=".pdf">
+                    <button class="btn-add" onclick="uploadPDF()">Upload</button>
+                </div>
+                <div id="upload-message"></div>
+                <br>
+                <div class="card-title">Uploaded PDFs</div>
+                <div id="pdfList">
+                    <div class="empty-state">No PDFs uploaded yet</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUIZ PAGE -->
+        <div class="page" id="page-quiz">
+            <div class="card-custom">
+                <div class="card-title">Generate Quiz</div>
+                <div class="form-row">
+                    <select class="input-custom" id="quizPdf">
+                        <option value="">Select PDF</option>
+                    </select>
+                    <button class="btn-add" onclick="generateQuiz()">Generate Quiz</button>
+                </div>
+                <div id="quiz-loading" style="display:none; text-align:center; padding:20px; color:#888">
+                    Generating quiz... please wait ⏳
+                </div>
+                <div id="quiz-container"></div>
+                <div id="quiz-submit" style="display:none; margin-top:16px">
+                    <button class="btn-add" onclick="submitQuiz()">Submit Answers</button>
+                </div>
+                <div id="quiz-result"></div>
+            </div>
+        </div>
+
+        <!-- WEAK POINTS PAGE -->
+        <div class="page" id="page-weak">
+            <div class="card-custom">
+                <div class="card-title">Your Weak Topics</div>
+                <div id="weak-list">
+                    <div class="empty-state">Take some quizzes first!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMER PAGE -->
+        <div class="page" id="page-timer">
+            <div style="display:flex; justify-content:center;">
+                <div class="card-custom" style="width:300px; text-align:center;">
+                    <div class="card-title" style="justify-content:center;">Focus Timer</div>
+                    <div class="timer-circle">
+                        <div class="timer-time" id="timer-display">25:00</div>
+                    </div>
+                    <div class="timer-label" id="timer-label">Pomodoro session</div>
+                    <div class="timer-btns">
+                        <button class="btn-timer start" id="timer-btn" onclick="toggleTimer()">▶ Start</button>
+                        <button class="btn-timer" onclick="resetTimer()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const API = 'http://127.0.0.1:8000/api';
+
+// ── NAVIGATION ──────────────────────────────────────────
+const pages = {
+    dashboard: { title: 'Dashboard', btn: 'Add session' },
+    subjects: { title: 'Subjects', btn: 'Add Subject' },
+    planner: { title: 'Study Planner', btn: 'Add Session' },
+    upload: { title: 'Upload PDF', btn: 'Upload PDF' },
+    quiz: { title: 'Quiz', btn: 'Generate Quiz' },
+    weak: { title: 'Weak Points', btn: 'Refresh' },
+    timer: { title: 'Focus Timer', btn: '' },
+};
+
+function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.getElementById('page-title').textContent = pages[name].title;
+    document.getElementById('topbar-btn').textContent = pages[name].btn;
+    event.currentTarget.classList.add('active');
+
+    if (name === 'dashboard') loadDashboard();
+    if (name === 'subjects') fetchSubjects();
+    if (name === 'planner') { fetchSubjectsForDropdown(); fetchSessions(); }
+    if (name === 'upload') { fetchSubjectsForDropdown('pdfSubject'); fetchPDFs(); }
+    if (name === 'quiz') fetchPDFsForDropdown();
+    if (name === 'weak') fetchWeakTopics();
+}
+
+function handleTopbarBtn() {
+    const active = document.querySelector('.page.active').id.replace('page-', '');
+    if (active === 'weak') fetchWeakTopics();
+}
+
+// ── AUTH ────────────────────────────────────────────────
+function getHeaders() {
+    return {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+        'Content-Type': 'application/json'
+    };
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = 'login.html';
+}
+
+// ── DASHBOARD ───────────────────────────────────────────
+function loadDashboard() {
+    fetch(`${API}/subjects/`, { headers: getHeaders() })
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('stat-subjects').textContent = data.length;
+            const list = document.getElementById('dashboard-subjects');
+            if (data.length === 0) {
+                list.innerHTML = '<div class="empty-state">No subjects yet</div>';
+                return;
+            }
+            list.innerHTML = data.map(s => `
+                <div class="list-item-custom">
+                    <div class="item-dot"></div>
+                    <div class="item-info">
+                        <div class="item-name">${s.subject_name}</div>
+                        <div class="item-sub">${s.study_hours} hrs/week</div>
+                    </div>
+                </div>
+            `).join('');
+        });
+
+    fetch(`${API}/study_planner/`, { headers: getHeaders() })
+        .then(r => r.json())
+        .then(data => {
+            const today = new Date().toISOString().split('T')[0];
+            const todaySessions = data.filter(s => s.date === today);
+            document.getElementById('stat-sessions').textContent = todaySessions.length;
+            const list = document.getElementById('dashboard-planner');
+            if (todaySessions.length === 0) {
+                list.innerHTML = '<div class="empty-state">No sessions today</div>';
+                return;
+            }
+            list.innerHTML = todaySessions.map(s => `
+                <div class="list-item-custom">
+                    <div class="item-dot" style="background:${s.completed ? '#3B6D11' : '#854F0B'}"></div>
+                    <div class="item-info">
+                        <div class="item-name">${s.start_time} - ${s.end_time}</div>
+                        <div class="item-sub">Subject #${s.subject}</div>
+                    </div>
+                    <span class="pill ${s.completed ? 'pill-done' : 'pill-pending'}">
+                        ${s.completed ? 'Done' : 'Pending'}
+                    </span>
+                </div>
+            `).join('');
+        });
+}
+
+// ── SUBJECTS ────────────────────────────────────────────
+function fetchSubjects() {
+    fetch(`${API}/subjects/`, { headers: getHeaders() })
+        .then(r => r.json())
+        .then(data => {
+            const list = document.getElementById('subjectList');
+            if (data.length === 0) {
+                list.innerHTML = '<div class="empty-state">No subjects yet. Add one above!</div>';
+                return;
+            }
+            list.innerHTML = data.map(s => `
+                <div class="list-item-custom">
+                    <div class="item-dot"></div>
+                    <div class="item-info">
+                        <div class="item-name">${s.subject_name}</div>
+                        <div class="item-sub">${s.study_hours} hrs/week</div>
+                    </div>
+                    <button class="btn-icon" onclick="deleteSubject(${s.id})">
+                        <i class="ti ti-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        });
+}
+
+function addSubject() {
+    const name = document.getElementById('subjectName').value;
+    const hours = document.getElementById('subjectHours').value;
+    if (!name || !hours) { alert('Fill all fields'); return; }
+
+    fetch(`${API}/subjects/`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({ subject_name: name, study_hours: hours })
+    })
+    .then(r => r.json())
+    .then(() => {
+        document.getElementById('subjectName').value = '';
+        document.getElementById('subjectHours').value = '';
+        fetchSubjects();
+    });
+}
+
+function deleteSubject(id) {
+    if (!confirm('Delete this subject?')) return;
+    fetch(`${API}/subjects/${id}/`, {
+        method: 'DELETE',
+        headers: getHeaders()
+    }).then(() => fetchSubjects());
+}
+
+function fetchSubjectsForDropdown(targetId = 'plannerSubject') {
+    fetch(`${API}/subjects/`, { headers: getHeaders() })
+        .then(r => r.json())
+        .then(data => {
+            const select = document.getElementById(targetId);
+            select.innerHTML = '<option value="">Select subject</option>';
+            data.forEach(s => {
+                select.innerHTML += `<option value="${s.id}">${s.subject_name}</option>`;
+            });
+        });
+}
+
+// ── STUDY PLANNER ───────────────────────────────────────
+function fetchSessions() {
+    fetch(`${API}/study_planner/`, { headers: getHeaders() })
+        .then(r => r.json())
+        .then(data => {
+            const list = document.getElementById('sessionList');
+            if (data.length === 0) {
+                list.innerHTML = '<div class="empty-state">No sessions yet!</div>';
+                return;
+            }
+            list.innerHTML = data.map(s => `
+                <div class="list-item-custom">
+                    <div class="item-dot" style="background:${s.completed ? '#3B6D11' : '#534AB7'}"></div>
+                    <div class="item-info">
+                        <div class="item-name">${s.date} | ${s.start_time} - ${s.end_time}</div>
+                        <div class="item-sub">Subject #${s.subject}</div>
+                    </div>
+                    <span class="pill ${s.completed ? 'pill-done' : 'pill-pending'}">
+                        ${s.completed ? 'Done' : 'Pending'}
+                    </span>
+                    ${!s.completed ? `<button class="btn-icon" onclick="markDone(${s.id})" title="Mark done">✅</button>` : ''}
+                    <button class="btn-icon" onclick="deleteSession(${s.id})">
+                        <i class="ti ti-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        });
+}
+
+function addSession() {
+    const subject = document.getElementById('plannerSubject').value;
+    const date = document.getElementById('plannerDate').value;
+    const start = document.getElementById('plannerStart').value;
+    const end = document.getElementById('plannerEnd').value;
+
+    if (!subject || !date || !start || !end) { alert('Fill all fields'); return; }
+
+    fetch(`${API}/study_planner/`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({
+            subject: subject,
+            date: date,
+            start_time: start,
+            end_time: end,
+            completed: false
+        })
+    })
+    .then(r => r.json())
+    .then(() => fetchSessions());
+}
+
+function markDone(id) {
+    fetch(`${API}/study_planner/${id}/`, {
+        method: 'PATCH',
+        headers: getHeaders(),
+        body: JSON.stringify({ completed: true })
+    }).then(() => fetchSessions());
+}
+
+function deleteSession(id) {
+    fetch(`${API}/study_planner/${id}/`, {
+        method: 'DELETE',
+        headers: getHeaders()
+    }).then(() => fetchSessions());
+}
+
+// ── PDF UPLOAD ───────────────────────────────────────────
+let uploadedPDFs = [];
+
+function uploadPDF() {
+    const subjectId = document.getElementById('pdfSubject').value;
+    const file = document.getElementById('pdfFile').files[0];
+    if (!subjectId || !file) { alert('Select subject and PDF'); return; }
+
+    const formData = new FormData();
+    formData.append('pdf', file);
+    formData.append('subject_id', subjectId);
+
+    document.getElementById('upload-message').innerHTML = '<p style="color:#534AB7">Uploading... ⏳</p>';
+
+    fetch(`${API}/ai/upload-pdf/`, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') },
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.pdf_id) {
+            document.getElementById('upload-message').innerHTML = '<p style="color:green">✅ Uploaded successfully!</p>';
+            fetchPDFs();
+        } else {
+            document.getElementById('upload-message').innerHTML = `<p style="color:red">❌ ${data.error}</p>`;
+        }
+    });
+}
+
+function fetchPDFs() {
+    // We store PDFs in memory for now
+}
+
+function fetchPDFsForDropdown() {
+    document.getElementById('quizPdf').innerHTML = '<option value="">Select PDF</option>';
+}
+
+// ── QUIZ ────────────────────────────────────────────────
+let currentQuestions = [];
+let currentPdfId = null;
+
+function generateQuiz() {
+    const pdfId = document.getElementById('quizPdf').value;
+    if (!pdfId) { alert('Select a PDF first'); return; }
+
+    currentPdfId = pdfId;
+    document.getElementById('quiz-loading').style.display = 'block';
+    document.getElementById('quiz-container').innerHTML = '';
+    document.getElementById('quiz-submit').style.display = 'none';
+
+    fetch(`${API}/ai/generate-quiz/`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({ pdf_id: pdfId })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById('quiz-loading').style.display = 'none';
+        currentQuestions = data.questions;
+        displayQuiz(data.questions);
+    });
+}
+
+function displayQuiz(questions) {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = questions.map((q, i) => `
+        <div style="margin-bottom:16px; padding:14px; border:1px solid #eee; border-radius:10px;">
+            <div style="font-size:13px; font-weight:600; margin-bottom:8px; color:#333">
+                ${i+1}. ${q.question}
+            </div>
+            ${q.options.map(opt => `
+                <label style="display:flex; align-items:center; gap:8px; padding:6px; cursor:pointer; font-size:13px;">
+                    <input type="radio" name="q${i}" value="${opt[0]}">
+                    ${opt}
+                </label>
+            `).join('')}
+        </div>
+    `).join('');
+    document.getElementById('quiz-submit').style.display = 'block';
+}
+
+function submitQuiz() {
+    const answers = {};
+    currentQuestions.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected) answers[i] = selected.value;
+    });
+
+    fetch(`${API}/ai/submit-quiz/`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify({
+            pdf_id: currentPdfId,
+            answers: answers,
+            questions: currentQuestions
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById('quiz-result').innerHTML = `
+            <div style="margin-top:16px; padding:16px; background:#EEEDFE; border-radius:10px; text-align:center;">
+                <div style="font-size:22px; font-weight:700; color:#534AB7">${data.score}/${data.total_questions}</div>
+                <div style="font-size:14px; color:#666">${data.percentage}% score</div>
+                ${data.weak_topics.length > 0 ? `
+                    <div style="margin-top:10px; font-size:13px; color:#854F0B">
+                        Weak topics: ${data.weak_topics.join(', ')}
+                    </div>
+                ` : '<div style="color:#3B6D11; margin-top:8px">Great job! No weak topics! 🎉</div>'}
+            </div>
+        `;
+        document.getElementById('quiz-submit').style.display = 'none';
+    });
+}
+
+// ── WEAK TOPICS ──────────────────────────────────────────
+function fetchWeakTopics() {
+    fetch(`${API}/ai/weak-topics/`, { headers: getHeaders() })
+        .then(r => r.json())
+        .then(data => {
+            const list = document.getElementById('weak-list');
+            if (data.weak_topics.length === 0) {
+                list.innerHTML = '<div class="empty-state">No weak topics yet! Take some quizzes first 🎉</div>';
+                return;
+            }
+            list.innerHTML = data.weak_topics.map((topic, i) => `
+                <div class="list-item-custom">
+                    <div style="font-size:12px; color:#aaa; min-width:20px">${i+1}</div>
+                    <div class="item-info">
+                        <div class="item-name">${topic}</div>
+                    </div>
+                    <span class="pill" style="background:#FCEBEB; color:#A32D2D">Needs revision</span>
+                </div>
+            `).join('');
+            document.getElementById('stat-weak').textContent = data.weak_topics.length;
+        });
+}
+
+// ── TIMER ────────────────────────────────────────────────
+let timerInterval = null;
+let timeLeft = 25 * 60;
+let isRunning = false;
+
+function toggleTimer() {
+    if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        document.getElementById('timer-btn').textContent = '▶ Resume';
+    } else {
+        isRunning = true;
+        document.getElementById('timer-btn').textContent = '⏸ Pause';
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                isRunning = false;
+                document.getElementById('timer-btn').textContent = '▶ Start';
+                document.getElementById('timer-label').textContent = 'Time is up! Take a break 🎉';
+                timeLeft = 5 * 60;
+            }
+        }, 1000);
+    }
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    timeLeft = 25 * 60;
+    updateTimerDisplay();
+    document.getElementById('timer-btn').textContent = '▶ Start';
+    document.getElementById('timer-label').textContent = 'Pomodoro session';
+}
+
+function updateTimerDisplay() {
+    const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+    const secs = (timeLeft % 60).toString().padStart(2, '0');
+    document.getElementById('timer-display').textContent = `${mins}:${secs}`;
+}
+
+// ── INIT ─────────────────────────────────────────────────
+loadDashboard();
+</script>
 </body>
 </html>
